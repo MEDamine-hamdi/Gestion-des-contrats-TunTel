@@ -27,7 +27,7 @@ export default function Espace() {
 
         const fetchOffres = async () => {
             try {
-                const res = await fetch('http://192.168.64.181:3001/offre');
+                const res = await fetch('http://localhost:3001/offre');
                 if (!res.ok) {
                     throw new Error('Failed to fetch offers');
                 }
@@ -40,7 +40,7 @@ export default function Espace() {
 
         const fetchLatestCC = async () => {
             try {
-                const res = await fetch('http://192.168.64.181:3001/latest-cc');
+                const res = await fetch('http://localhost:3001/latest-cc');
                 if (!res.ok) {
                     throw new Error('Failed to fetch latest CC');
                 }
@@ -74,7 +74,7 @@ export default function Espace() {
 
     const checkIfIdExists = async (id) => {
         try {
-            const res = await fetch(`http://192.168.64.181:3001/tt/${id}`);
+            const res = await fetch(`http://localhost:3001/tt/${id}`);
             if (res.ok) {
                 const data = await res.json();
                 return data.exists;

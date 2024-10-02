@@ -12,7 +12,7 @@ function AddUser() {
         const user = { username, email, password, isAdmin, profile };
     
         try {
-            const res = await fetch("http://192.168.64.181:3001/api/user", {
+            const res = await fetch("http://localhost:3001/api/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

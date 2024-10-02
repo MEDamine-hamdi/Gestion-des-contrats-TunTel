@@ -24,7 +24,7 @@ const Chiffre = ({ loggedInUserProfile }) => {
   useEffect(() => {
     const fetchEspacett = async () => {
       try {
-        const res = await fetch('http://192.168.64.181:3001/mainTT');
+        const res = await fetch('http://localhost:3001/mainTT');
         if (!res.ok) {
           throw new Error('Failed to fetch Espacett data');
         }
@@ -42,7 +42,7 @@ const Chiffre = ({ loggedInUserProfile }) => {
   useEffect(() => {
     const fetchB2B = async () => {
       try {
-        const res = await fetch('http://192.168.64.181:3001/mainB2B');
+        const res = await fetch('http://localhost:3001/mainB2B');
         if (!res.ok) {
           throw new Error('Failed to fetch B2B data');
         }

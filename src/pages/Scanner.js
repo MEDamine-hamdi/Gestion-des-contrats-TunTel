@@ -35,7 +35,7 @@ function Scanner() {
     formData.append('userProfile', JSON.stringify(user));
 
     try {
-      const response = await fetch('http://192.168.64.181:3001/upload-pdf', {
+      const response = await fetch('http://localhost:3001/upload-pdf', {
         method: 'POST',
         body: formData,
       });

@@ -6,7 +6,7 @@ function ContratTT() {
     useEffect(() => {
         const fetchEspacett_tmp = async () => {
             try {
-                const res = await fetch('http://192.168.64.181:3001/contrat-b2b');
+                const res = await fetch('http://localhost:3001/contrat-b2b');
                 const data = await res.json();
                 setEspacett_tmp(data);
             } catch (error) {
@@ -18,7 +18,7 @@ function ContratTT() {
 
     const saveContract = async (contract) => {
         try {
-            const res = await fetch('http://192.168.64.181:3001/save-contrat-b2b', {
+            const res = await fetch('http://localhost:3001/save-contrat-b2b', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ function ContratTT() {
     const deleteContract = async (id) => {
         if (window.confirm('Êtes-vous sûr de vouloir supprimer ce contrat?')) {
             try {
-                const res = await fetch(`http://192.168.64.181:3001/delete-contrat-b2b/${id}`, {
+                const res = await fetch(`http://localhost:3001/delete-contrat-b2b/${id}`, {
                     method: 'DELETE',
                 });
                 if (res.ok) {

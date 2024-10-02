@@ -54,7 +54,7 @@ function DataDisplay() {
   // Function to fetch data from /mainTT
   const fetchMainTTData = async () => {
     try {
-      const response = await fetch('http://192.168.64.181:3001/mainTT');
+      const response = await fetch('http://localhost:3001/mainTT');
       if (!response.ok) {
         throw new Error('Failed to fetch MainTT data');
       }
@@ -68,7 +68,7 @@ function DataDisplay() {
   // Function to fetch data from /mainB2B
   const fetchMainB2BData = async () => {
     try {
-      const response = await fetch('http://192.168.64.181:3001/mainB2B');
+      const response = await fetch('http://localhost:3001/mainB2B');
       if (!response.ok) {
         throw new Error('Failed to fetch MainB2B data');
       }

@@ -17,7 +17,7 @@ const Chiffre = () => {
   useEffect(() => {
     const fetchEspacett = async () => {
       try {
-        const res = await fetch('http://192.168.64.181:3001/mainTT');
+        const res = await fetch('http://localhost:3001/mainTT');
         const data = await res.json();
         setEspacett(data);
       } catch (error) {
@@ -30,7 +30,7 @@ const Chiffre = () => {
   useEffect(() => {
     const fetchB2B = async () => {
       try {
-        const res = await fetch('http://192.168.64.181:3001/mainB2B');
+        const res = await fetch('http://localhost:3001/mainB2B');
         const data = await res.json();
         setB2B(data);
       } catch (error) {
@@ -42,7 +42,7 @@ const Chiffre = () => {
 
   const fetchChiffres = async () => {
     try {
-      const res = await fetch('http://192.168.64.181:3001/chiffreA');
+      const res = await fetch('http://localhost:3001/chiffreA');
       const data = await res.json();
       setChiffres(data);
     } catch (error) {

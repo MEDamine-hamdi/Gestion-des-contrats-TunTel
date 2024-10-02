@@ -27,7 +27,7 @@ export default function B2B() {
 
         const fetchOffres = async () => {
             try {
-                const res = await fetch('http://192.168.64.181:3001/offre');
+                const res = await fetch('http://localhost:3001/offre');
                 if (!res.ok) {
                     throw new Error('Failed to fetch offers');
                 }
@@ -40,7 +40,7 @@ export default function B2B() {
 
         const fetchLatestCC = async () => {
             try {
-                const res = await fetch('http://192.168.64.181:3001/latest-cc');
+                const res = await fetch('http://localhost:3001/latest-cc');
                 if (!res.ok) {
                     throw new Error('Failed to fetch latest CC');
                 }
@@ -79,7 +79,7 @@ export default function B2B() {
 
     const checkIfIdExists = async (id) => {
         try {
-            const res = await fetch(`http://192.168.64.181:3001/b2b/${id}`);
+            const res = await fetch(`http://localhost:3001/b2b/${id}`);
             if (res.ok) {
                 const data = await res.json();
                 return data.exists;
@@ -104,7 +104,7 @@ export default function B2B() {
             }
 
             try {
-                const result = await fetch("http://192.168.64.181:3001/b2b", {
+                const result = await fetch("http://localhost:3001/b2b", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -128,7 +128,7 @@ export default function B2B() {
 
                 const data = await result.json();
 
-                await fetch("http://192.168.64.181:3001/cc", {
+                await fetch("http://localhost:3001/cc", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

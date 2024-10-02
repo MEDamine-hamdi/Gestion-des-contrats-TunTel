@@ -6,7 +6,7 @@ function Users() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const res = await fetch('http://172.16.0.254:3001/api/user');
+                const res = await fetch('http://localhost:3001/api/user');
                 const data = await res.json();
                 setUsers(data);
             } catch (err) {
@@ -20,7 +20,7 @@ function Users() {
     const deleteUser = async (id) => {
         if (window.confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')) {
             try {
-                const res = await fetch(`http://172.16.0.254:3001/api/user/${id}`, {
+                const res = await fetch(`http://localhost:3001/api/user/${id}`, {
                     method: 'DELETE',
                 });
                 if (res.ok) {

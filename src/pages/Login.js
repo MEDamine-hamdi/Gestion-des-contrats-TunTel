@@ -12,7 +12,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const res = await axios.post('http://192.168.0.200:3001/login', { username, password });
+            const res = await axios.post('http://localhost:3001/login', { username, password });
 
             if (res.data.user) {
                 localStorage.setItem('user', JSON.stringify(res.data.user)); // Store user data

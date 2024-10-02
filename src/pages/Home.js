@@ -10,7 +10,7 @@ export default function HomePage() {
     useEffect(() => {
         const fetchHighestSums = async () => {
             try {
-                const response = await fetch('http://192.168.64.181:3001/highest-sum-this-month');
+                const response = await fetch('http://localhost:3001/highest-sum-this-month');
                 if (!response.ok) {
                     throw new Error('Failed to fetch highest sums');
                 }
@@ -27,7 +27,7 @@ export default function HomePage() {
 
         const fetchContracts = async () => {
             try {
-                const response = await fetch('http://192.168.64.181:3001/contracts-expiring-soon');
+                const response = await fetch('http://localhost:3001/contracts-expiring-soon');
                 if (!response.ok) {
                     throw new Error('Failed to fetch contracts');
                 }
@@ -56,7 +56,7 @@ export default function HomePage() {
     }
 
     return (
-        <div style={{ margin: "0 auto", width: "80%", padding: "20px" }}>
+        <div style={{ margin: "0 auto", width: "60%", padding: "20px" }}>
             <div style={{ marginBottom: "20px", padding: "10px", backgroundColor: "#f4f4f4", borderRadius: "5px" }}>
                 <h2>Montant le plus élevé ce mois-ci</h2>
                 <p>Le montant le plus élevé est : {highestB2B.totalMontant} DT par : {highestB2B.user}</p>
@@ -64,38 +64,51 @@ export default function HomePage() {
             </div>
 
             <h2>Contrats à renouveler</h2>
+            
             {contracts.length > 0 ? (
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                    <thead>
-                        <tr>
-                            <th>Objet</th>
-                            <th>Nombre</th>
-                            <th>Montant</th>
-                            <th>Type</th>
-                            <th>Nom entreprise</th>
-                            <th>ID entreprise</th>
-                            <th>Durée contrat</th>
-                            <th>CC</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {contracts.map((contract) => (
-                            <tr key={contract._id}>
-                                <td>{contract.objet}</td>
-                                <td>{contract.nombre}</td>
-                                <td>{contract.montant} DT</td>
-                                <td>{contract.type}</td>
-                                <td>{contract.nom}</td>
-                                <td>{contract.id}</td>
-                                <td>{contract.duree}</td>
-                                <td>{contract.cc}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>Aucun contrat à renouveler</p>
-            )}
+    <table style={{ 
+        width: "100%", 
+        borderCollapse: "collapse", 
+        margin: "20px 0", 
+        fontSize: "16px", 
+        textAlign: "left" 
+    }}>
+        <thead>
+            <tr style={{ backgroundColor: "#f2f2f2" }}>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>Objet</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>Nombre</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>Montant</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>Type</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>Nom entreprise</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>ID entreprise</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>Durée contrat</th>
+                <th style={{ padding: "12px", borderBottom: "2px solid #ddd" }}>CC</th>
+            </tr>
+        </thead>
+        <tbody>
+            {contracts.map((contract, index) => (
+                <tr 
+                    key={contract._id} 
+                    style={{ backgroundColor: index % 2 === 0 ? "#f9f9f9" : "#fff", transition: "background-color 0.3s" }}
+                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#f1f1f1"}
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = index % 2 === 0 ? "#f9f9f9" : "#fff"}
+                >
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.objet}</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.nombre}</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.montant} DT</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.type}</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.nom}</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.id}</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.duree}</td>
+                    <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>{contract.cc}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+) : (
+    <p>Aucun contrat a renouveler</p>
+)}
+
         </div>
     );
 }

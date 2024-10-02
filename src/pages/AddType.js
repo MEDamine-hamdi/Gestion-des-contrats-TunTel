@@ -8,7 +8,7 @@ function AddType(){
         const newOffre = { type: Type };
     
         try {
-            const res = await fetch("http://192.168.64.181:3001/offre", {
+            const res = await fetch("http://localhost:3001/offre", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

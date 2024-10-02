@@ -37,7 +37,7 @@ function FileList() {
     useEffect(() => {
         const fetchFiles = async () => {
             try {
-                const response = await fetch('http://192.168.64.181:3001/files');
+                const response = await fetch('http://localhost:3001/files');
                 if (response.ok) {
                     const data = await response.json();
                     setFiles(data);
@@ -60,8 +60,8 @@ function FileList() {
                     <li key={file._id} style={listItemStyle}>
                         <p><strong>Nom fichier :</strong> {file.name}</p>
                         <p><strong>Profile :</strong> {file.userProfile}</p>
-                        <a href={`http://192.168.64.181:3001/files/${file.name}`} download style={buttonStyle}>Télécharger</a>
-                        <a href={`http://192.168.64.181:3001/files/view/${file.name}`} style={buttonStyle}>Voir</a>
+                        <a href={`http://localhost:3001/files/${file.name}`} download style={buttonStyle}>Télécharger</a>
+                        <a href={`http://localhost:3001/files/view/${file.name}`} style={buttonStyle}>Voir</a>
                     </li>
                 ))}
             </ul>
