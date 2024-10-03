@@ -36,7 +36,8 @@ function DashConsultant(){
                 }
                 .content {
                     margin-top:8%;
-                    overflowY: auto
+                    overflowY: auto;
+                    margin-left:10%;
                 }
                 `}
             </style>

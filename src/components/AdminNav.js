@@ -7,6 +7,7 @@ function AdminNav() {
   const [showB2BPopup, setShowB2BPopup] = useState(false);
   const [showEspaceTTPopup, setShowEspaceTTPopup] = useState(false);
   const [showTTPopup, setShowTTPopup] = useState(false);
+  const [showInfoPopup, setShowInfoPopup] = useState(false); // New state for Information utile
 
   // Inline styles
   const sidebarStyle = {
@@ -30,31 +31,28 @@ function AdminNav() {
     marginLeft: 'auto', // Auto margins to center horizontally
     marginRight: 'auto',
     marginBottom:'100px' // Auto margins to center horizontally
-};
+  };
 
-
-const linkStyle = {
-  color: '#ffffff', // Updated color
-  fontWeight: '600', // Added font weight
-  textDecoration: 'none',
-  fontSize: '1rem',
-  padding: '0.5rem 1rem', // Original padding
-  borderRadius: '5px', // Existing border radius
-  marginBottom: '10px', // Added margin bottom
-  position: 'relative',
-  transition: 'background 0.3s', // Transition for hover effect
-  backgroundColor: '#1fa9ff',
-  marginBottom:'20px' // Added background color
-};
-
-
+  const linkStyle = {
+    color: '#ffffff', // Updated color
+    fontWeight: '600', // Added font weight
+    textDecoration: 'none',
+    fontSize: '1rem',
+    padding: '0.5rem 1rem', // Original padding
+    borderRadius: '5px', // Existing border radius
+    marginBottom: '10px', // Added margin bottom
+    position: 'relative',
+    transition: 'background 0.3s', // Transition for hover effect
+    backgroundColor: '#1fa9ff',
+    marginBottom:'20px' // Added background color
+  };
 
   const popupStyle = {
     position: 'relative',
     backgroundColor: '#ffffff',
     padding: '0.5rem',
     borderRadius: '5px',
-    display: showB2BPopup || showEspaceTTPopup || showTTPopup ? 'block' : 'none', // Control visibility
+    display: showB2BPopup || showEspaceTTPopup || showTTPopup || showInfoPopup ? 'block' : 'none', // Control visibility
     marginTop: '0.5rem', // Space between link and popup
     transition: 'max-height 0.3s ease-out', // Sliding transition
     overflow: 'hidden', // Prevent overflow
@@ -68,38 +66,38 @@ const linkStyle = {
     display: 'block', // Make each link block-level for full-width
     fontWeight: 'bold',
     marginLeft: '18px', // Make the text bold
-};
+  };
 
-const homeStyle = {
-  backgroundColor: '#ffffff',
-  textDecoration: 'none',
-  fontSize: '1rem',
-  padding: '0.5rem 1rem',
-  borderRadius: '5px',
-  marginBottom: '17px',
-  display: 'flex',
-  alignItems: 'center',
-};
+  const homeStyle = {
+    backgroundColor: '#ffffff',
+    textDecoration: 'none',
+    fontSize: '1rem',
+    padding: '0.5rem 1rem',
+    borderRadius: '5px',
+    marginBottom: '17px',
+    display: 'flex',
+    alignItems: 'center',
+  };
 
-const homeLStyle = {
-  color: '#0092ec',
-  padding: '0.5rem',
-  fontWeight: 'bold',
-  textDecoration: 'none',
-  marginLeft: '10px',  // Adjust the space between the icon and text
-};
+  const homeLStyle = {
+    color: '#0092ec',
+    padding: '0.5rem',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    marginLeft: '10px',  // Adjust the space between the icon and text
+  };
 
-const homeIStyle = {
-  height: '20px',
-  width: 'auto',
-};
+  const homeIStyle = {
+    height: '20px',
+    width: 'auto',
+  };
 
   return (
     <div style={sidebarStyle}>
       <img src={Logo} className="img" alt="Logo" style={logoStyle} />
-      <div style ={homeStyle}>
-        <img src={home} alt="Home" style={homeIStyle}/>
-        <Link to="home" style ={homeLStyle}>Home</Link>
+      <div style={homeStyle}>
+        <img src={home} alt="Home" style={homeIStyle} />
+        <Link to="home" style={homeLStyle}>Home</Link>
       </div>
       <Link to="adduser" style={linkStyle}>Ajouter utilisateur</Link>
       <Link to="users" style={linkStyle}>Liste des utilisateur</Link>
@@ -154,7 +152,22 @@ const homeIStyle = {
       </div>
 
       <Link to="ajouter-type" style={linkStyle}>Ajouter une offre</Link>
-      <Link to="chiffre-affere" style={linkStyle}>Chiffre affaire</Link>
+
+      {/* Hover to show popup for Information utile */}
+      <div
+        onMouseEnter={() => setShowInfoPopup(true)} // Updated to use showInfoPopup
+        onMouseLeave={() => setShowInfoPopup(false)} // Updated to use showInfoPopup
+      >
+        <div style={linkStyle}>
+          Information utile
+        </div>
+        {showInfoPopup && ( // Updated to use showInfoPopup
+          <div style={popupStyle}>
+            <Link to="chiffre-affere" style={popupLinkStyle}>Chiffre d'affaire</Link>
+            <Link to="stat" style={popupLinkStyle}>Statistique</Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import Home from '../pages/Home';
 import Scanner from '../pages/Scanner';
 import List from '../pages/List';
 import Listc from '../pages/ListC';
+import Stat from '../pages/Stat'
 function AdminDash() {
   const navigate = useNavigate();
 
@@ -43,6 +44,7 @@ function AdminDash() {
           }
           .content {
             margin-top: 8%;
+            margin-left:10%;
           }
           .content::-webkit-scrollbar {
             display: none; /* Hide scrollbar for Chrome, Safari and Opera */
@@ -69,6 +71,7 @@ function AdminDash() {
           <Route path="listf" element={<List />} />
           <Route path="listc" element={<Listc />} />
           <Route path="home" element={<Home />} />
+          <Route path="stat" element={<Stat />} />
         </Routes>
       </div>
     </div>

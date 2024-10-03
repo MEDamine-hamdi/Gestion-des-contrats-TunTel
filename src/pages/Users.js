@@ -37,7 +37,7 @@ function Users() {
 
     const containerStyle = {
         margin: '0 auto',
-        width: '35%',
+        width: '45%',
         padding: '20px',
         borderRadius: '5px',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
