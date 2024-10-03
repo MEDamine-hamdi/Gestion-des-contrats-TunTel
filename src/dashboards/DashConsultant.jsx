@@ -6,7 +6,8 @@ import ContratB2B from '../pages/ContratB2B';
 import NavConsultant from '../components/Nav-visiteur';
 import Chiffre from '../pages/Chiffre+';
 import Home from '../pages/Home';
-import Bar from '../components/bar'
+import Bar from '../components/bar';
+import Stat from '../pages/Stat'
 
 
 function DashConsultant(){
@@ -37,7 +38,7 @@ function DashConsultant(){
                 .content {
                     margin-top:8%;
                     overflowY: auto;
-                    margin-left:10%;
+                    margin-left:12%;
                 }
                 `}
             </style>
@@ -53,6 +54,7 @@ function DashConsultant(){
           <Route path="Contrat-B2B" element={<ContratB2B />} />
           <Route path="chiffre-affere" element={<Chiffre />} />
           <Route path="home" element={<Home />} />
+          <Route path="stat" element={<Stat />} />
         </Routes>
       </div>
       

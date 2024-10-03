@@ -44,7 +44,7 @@ function AdminDash() {
           }
           .content {
             margin-top: 8%;
-            margin-left:10%;
+            margin-left:12%;
           }
           .content::-webkit-scrollbar {
             display: none; /* Hide scrollbar for Chrome, Safari and Opera */

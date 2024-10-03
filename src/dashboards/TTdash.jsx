@@ -25,7 +25,7 @@ function TTNav() {
           .content {
             margin-top: 8%;
             overflow-y: auto; /* Corrected: Use camelCase for CSS properties */
-            margin-left:10%;
+            margin-left:12%;
           }
         `}
       </style>

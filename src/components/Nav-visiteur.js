@@ -5,7 +5,7 @@ import home from '../assets/home.png';
 
 function Navvisiteur() {
     const [openLinks, setOpenLinks] = useState(false);
-
+    const [showInfoPopup, setShowInfoPopup] = useState(false);
     const toggleNavbar = () => {
         setOpenLinks(!openLinks);
     };
@@ -46,6 +46,26 @@ function Navvisiteur() {
         transition: 'background 0.3s', // Transition for hover effect
     };
 
+    const popupStyle = {
+        position: 'relative',
+        backgroundColor: '#ffffff',
+        padding: '0.5rem',
+        borderRadius: '5px',
+        marginTop: '0.5rem',
+        transition: 'max-height 0.3s ease-out',
+        overflow: 'hidden',
+    };
+
+    const popupLinkStyle = {
+        color: '#0092ec',
+        textDecoration: 'none',
+        padding: '0.5rem',
+        borderRadius: '5px',
+        display: 'block',
+        fontWeight: 'bold',
+        marginLeft: '18px',
+    };
+
     const homeStyle = {
         backgroundColor: '#ffffff',
         textDecoration: 'none',
@@ -83,8 +103,22 @@ function Navvisiteur() {
             
             <Link to="Contrat-B2B" style={linkStyle}>Valider contrats B2B</Link>
             <Link to="contrats-TT" style={linkStyle}>Valider contrats espaces TT</Link>
-            <Link to="chiffre-affere" style={linkStyle}>Chiffre d'affaire</Link>
-
+            
+            <div
+                onMouseEnter={() => setShowInfoPopup(true)}
+                onMouseLeave={() => setShowInfoPopup(false)}
+            >
+                <div style={linkStyle}>
+                    Information utile
+                </div>
+                {showInfoPopup && (
+                    <div style={popupStyle}>
+                        <Link to="chiffre-affere" style={popupLinkStyle}>Chiffre d'affaire</Link>
+                        <Link to="stat" style={popupLinkStyle}>Statistique</Link>
+                    </div>
+                )}
+            </div>
+            
             <button onClick={toggleNavbar} name="Nav" style={{ display: "none" }}>Toggle</button>
         </div>
     );

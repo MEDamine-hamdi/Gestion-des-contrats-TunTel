@@ -25,7 +25,7 @@ function UserNav (){
                 .content {
                     margin-top:8%;
                     overflowY: auto;
-                    margin-left:10%;
+                    margin-left:12%;
                 }
                 `}
             </style>
