@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -14,6 +13,7 @@ const Chiffre = () => {
   const [monthlySums, setMonthlySums] = useState({});
   const [types, setTypes] = useState([]);
 
+  // Fetch espacett data
   useEffect(() => {
     const fetchEspacett = async () => {
       try {
@@ -27,6 +27,7 @@ const Chiffre = () => {
     fetchEspacett();
   }, []);
 
+  // Fetch B2B data
   useEffect(() => {
     const fetchB2B = async () => {
       try {
@@ -40,6 +41,7 @@ const Chiffre = () => {
     fetchB2B();
   }, []);
 
+  // Fetch chiffres data
   const fetchChiffres = async () => {
     try {
       const res = await fetch('http://localhost:3001/chiffreA');
@@ -54,6 +56,7 @@ const Chiffre = () => {
     fetchChiffres();
   }, []);
 
+  // Calculate monthly sums
   useEffect(() => {
     const calculateMonthlySums = () => {
       const allData = [...espacett, ...b2b];
@@ -78,14 +81,22 @@ const Chiffre = () => {
     calculateMonthlySums();
   }, [espacett, b2b]);
 
+  // Submit handler for calculating and saving highest chiffre
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Parse the selected date (objet) into month and year
     const date = new Date(objet);
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-
+  
+    // Combine espacett and b2b data
     const allData = [...espacett, ...b2b];
+  
+    // Define the profiles to sum for
     const profiles = ["b2b-1", "b2b-2", "espacett-1", "espacett-2", "espacett-3", "espacett-4", "espacett-5"];
+  
+    // Calculate the sum for each profile for the selected month/year
     const sums = profiles.reduce((acc, profile) => {
       const total = allData.filter(item => {
         const itemDate = new Date(item.objet);
@@ -96,13 +107,20 @@ const Chiffre = () => {
       acc[profile] = total;
       return acc;
     }, {});
-
+  
+    // Identify the profile with the highest sum
     const highestProfile = Object.entries(sums).reduce((max, [profile, sum]) => {
       return sum > max.sum ? { profile, sum } : max;
     }, { profile: '', sum: 0 });
-
+  
+    // Set the total amount (chiffre) for display
     setTotalMontant(highestProfile.sum);
-
+  
+    // Log the values to ensure they are correct
+    console.log('Selected Date:', objet);
+    console.log('Highest Profile:', highestProfile.profile);
+    console.log('Chiffre (Sum):', highestProfile.sum);
+  
     // Save the highest chiffre d'affaire
     try {
       const res = await fetch('http://localhost:3001/chiffreA', {
@@ -110,12 +128,15 @@ const Chiffre = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ objet, user: highestProfile.profile, chiffre: highestProfile.sum.toString() }),
+        body: JSON.stringify({
+          objet,               // The selected date (objet)
+          user: highestProfile.profile,  // The profile with the highest sum
+          chiffre: highestProfile.sum    // Send sum as a number, not a string
+        }),
       });
-
+  
       if (res.ok) {
         alert('Chiffre saved successfully');
-        // Update the chiffres list after saving
         fetchChiffres(); // Fetch updated chiffres after saving
       } else {
         alert('Failed to save chiffre');
@@ -124,7 +145,6 @@ const Chiffre = () => {
       console.error('Error saving chiffre:', error);
     }
   };
-
   const chartData = {
     labels: Object.keys(monthlySums),
     datasets: types.map((type, index) => ({
@@ -193,14 +213,11 @@ const Chiffre = () => {
       </div>
 
       <div style={{ marginTop: "20px" }}>
-        <h3>Statistique des offres:</h3>
-        <div style={{ overflowX: "auto" }}>
-          <Bar data={chartData} options={chartOptions} />
-        </div>
+        <h3>Statistique par mois :</h3>
+        <Bar data={chartData} options={chartOptions} />
       </div>
     </div>
   );
 };
 
-export default Chiffre
-
+export default Chiffre;

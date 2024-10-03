@@ -13,6 +13,7 @@ const File = require('./models/file'); // Require the File model
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+
 const fileUpload = require('express-fileupload');
 
 const app = express();
@@ -408,7 +409,29 @@ app.get("/offre", async (req, res) => {
     const Offres = await Offre.find();
     res.json(Offres);
 });
-
+app.post('/chiffreA', async (req, res) => {
+    try {
+      const { objet, user, chiffre } = req.body;
+  
+      // Log the data for debugging
+      console.log('Received data:', { objet, user, chiffre });
+  
+      // Create a new Chiffre document
+      const newChiffre = new Chiffre({
+        objet,
+        user,
+        chiffre,
+      });
+  
+      // Save the document in MongoDB
+      const savedChiffre = await newChiffre.save();
+  
+      // Send back the saved document
+      res.status(200).json(savedChiffre);
+    } catch (error) {
+      console.error('Error saving chiffre:', error);
+      res.status(500).json({ message: 'Failed to save chiffre' });
+    }});
 app.get("/chifre", async (req, res) => {
     const { profile, objet } = req.query;
 
@@ -452,12 +475,7 @@ app.delete('/api/user/:id', async (req, res) => {
     }
 });
 
-app.post('/chiffreA', async (req, res) => {
-    const { objet, user, chiffre } = req.body;
-    const newChiffre = new Chiffre({ objet, user, chiffre });
-    await newChiffre.save();
-    res.status(201).json(newChiffre);
-});
+
 
 app.get('/chiffreA', async (req, res) => {
     const chiffre_affaire = await Chiffre.find();
